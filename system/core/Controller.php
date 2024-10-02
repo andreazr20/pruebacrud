@@ -51,6 +51,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link		https://codeigniter.com/userguide3/general/controllers.html
  */
 class CI_Controller {
+	protected $benchmark;
+	protected $hooks;
+	protected $config;
+	protected $log;
+	protected $utf8;
+	protected $uri;
+	protected $router;
+	protected $output;
+	protected $security;
+	protected $input;
+	protected $lang;
+	
 
 	/**
 	 * Reference to the CI singleton
@@ -86,6 +98,7 @@ class CI_Controller {
 		$this->load =& load_class('Loader', 'core');
 		$this->load->initialize();
 		log_message('info', 'Controller Class Initialized');
+		
 	}
 
 	// --------------------------------------------------------------------

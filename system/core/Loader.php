@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link		https://codeigniter.com/userguide3/libraries/loader.html
  */
 class CI_Loader {
-
+	protected $load;
 	// All these are set automatically. Don't mess with them.
 	/**
 	 * Nesting level of the output buffering mechanism
@@ -990,14 +990,16 @@ class CI_Loader {
 		 */
 		if (ob_get_level() > $this->_ci_ob_level + 1)
 		{
-			ob_end_flush();
+    		ob_end_flush();
 		}
 		else
 		{
-			$_ci_CI->output->append_output(ob_get_contents());
+			// Acceso seguro a la salida
+			if (isset($_ci_CI) && method_exists($_ci_CI->output, 'append_output')) {
+				$_ci_CI->output->append_output(ob_get_contents());
+			}
 			@ob_end_clean();
 		}
-
 		return $this;
 	}
 
